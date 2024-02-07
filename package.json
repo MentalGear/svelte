@@ -23,7 +23,15 @@
     "test": "vitest run --coverage",
     "test-output": "vitest run --reporter=json --outputFile=sites/svelte-5-preview/src/routes/status/results.json",
     "changeset:version": "changeset version && pnpm -r generate:version && git add --all",
-    "changeset:publish": "changeset publish"
+    "changeset:publish": "changeset publish",
+    "test:proxy-benchmark-all": "pnpm test:proxy-benchmark-1 && pnpm test:proxy-benchmark-2 && pnpm test:proxy-benchmark-3",
+    "test:proxy-benchmark-1": "pnpm use-proxy1 && pnpm build-and-test",
+    "test:proxy-benchmark-2": "pnpm use-proxy2 && pnpm build-and-test",
+    "test:proxy-benchmark-3": "pnpm use-proxy3 && pnpm build-and-test",
+    "build-and-test": "pnpm run build && node benchmark-proxy.js",
+    "use-proxy1": "cp packages/svelte/src/internal/client/proxy_1.js packages/svelte/src/internal/client/proxy.js",
+    "use-proxy2": "cp packages/svelte/src/internal/client/proxy_2.js packages/svelte/src/internal/client/proxy.js",
+    "use-proxy3": "cp packages/svelte/src/internal/client/proxy_3.js packages/svelte/src/internal/client/proxy.js"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1",

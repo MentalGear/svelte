@@ -1,4 +1,4 @@
-lockfileVersion: '6.0'
+lockfileVersion: '6.1'
 
 settings:
   autoInstallPeers: true
@@ -138,6 +138,9 @@ importers:
       source-map:
         specifier: ^0.7.4
         version: 0.7.4
+      terser:
+        specifier: ^5.27.0
+        version: 5.27.0
       tiny-glob:
         specifier: ^0.2.9
         version: 0.2.9
