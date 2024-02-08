@@ -1,3 +1,11 @@
+# what I did
+What's this fork for:
+- `chore-proxy branch`: tried to refactor the proxy function for readability, but performance not exactly as good as original. since rich doesnt want to use any build step/terser, it has to stay as ugly. (https://github.com/sveltejs/svelte/pull/10423)
+
+- `benchmark branch`: Also tried adding a benchmakr that would build the source and test different versions of the proxy function.
+
+-----
+
 [![Cybernetically enhanced web apps: Svelte](https://sveltejs.github.io/assets/banner.png)](https://svelte.dev)
 
 [![license](https://img.shields.io/npm/l/svelte.svg)](LICENSE.md) [![Chat](https://img.shields.io/discord/457912077277855764?label=chat&logo=discord)](https://svelte.dev/chat)
