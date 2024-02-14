@@ -1,5 +1,7 @@
 # what I did
 What's this fork for:
+- `feat-custom-classes-patch-reactivity `: hack (to be used with pnpm patch) to allow any custom class to gain reactivity
+
 - `chore-proxy branch`: tried to refactor the proxy function for readability, but performance not exactly as good as original. since rich doesnt want to use any build step/terser, it has to stay as ugly. (https://github.com/sveltejs/svelte/pull/10423)
 
 - `benchmark branch`: Also tried adding a benchmakr that would build the source and test different versions of the proxy function.
