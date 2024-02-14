@@ -24,6 +24,8 @@ import {
 export const STATE_SYMBOL = Symbol('$state');
 export const READONLY_SYMBOL = Symbol('readonly');
 
+const allowed_custom_classes = new Set();
+
 /**
  * @template T
  * @param {T} value
@@ -40,10 +42,28 @@ export function proxy(value, immutable = true) {
 			if (metadata.t === value || metadata.p === value) return metadata.p;
 		}
 
+		// this only gets called when setting up a new proxy,
+		// not for read/write ops afterwards
 		const prototype = get_prototype_of(value);
 
+		// here we check for and pass the config for custom reactive classes
+		// typeof probaly to expensive: if (typeof prototype === 'object' && '_customReactiveClasses' in value) {
+		if ('_customReactiveClasses' in value) {
+			// used like this to only check further if object
+			// as `in` is about 80% slower than === check
+			allowed_custom_classes.add(value._customReactiveClasses);
+			// we don't need this anymore
+			delete value._customReactiveClasses;
+		}
+
 		// TODO handle Map and Set as well
-		if (prototype === object_prototype || prototype === array_prototype) {
+		if (
+			prototype === object_prototype ||
+			prototype === array_prototype ||
+			// this has no perf impact for setting up the above prototypes since
+			// it only runs when the condition reaches up to here
+			allowed_custom_classes.has(prototype?.constructor?.name)
+		) {
 			const proxy = new Proxy(value, state_proxy_handler);
 
 			define_property(value, STATE_SYMBOL, {
